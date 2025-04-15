@@ -15,7 +15,6 @@ import org.springframework.web.filter.OncePerRequestFilter
 class JwtAuthFilter(
     private val userDetailsService: UserDetailsService,
     private val tokenService: TokenService,
-
 ) : OncePerRequestFilter() {
     val BEARER: String = "Bearer "
     val AUTHORIZATION: String = "Authorization"
@@ -37,7 +36,7 @@ class JwtAuthFilter(
 
                     if (username == userDetails.username) {
                         val authToken = UsernamePasswordAuthenticationToken(
-                            userDetails,null, userDetails.authorities
+                            userDetails, null, userDetails.authorities
                         )
                         authToken.details = WebAuthenticationDetailsSource().buildDetails(request)
                         SecurityContextHolder.getContext().authentication = authToken
