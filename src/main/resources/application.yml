@@ -1,0 +1,21 @@
+spring:
+  application:
+    name: vivid-finance-api
+  datasource:
+    url: jdbc:postgresql://localhost:5432/vivid_db
+    username: vivid_user
+    password: test
+    driver-class-name: org.postgresql.Driver
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+    properties:
+      hibernate:
+        format_sql: true
+  flyway:
+    default-schema: vivid_data
+
+jwt:
+  secret: your-very-secure-secret-key
+  expiration-ms: 3600000 # 1 hour
