@@ -1,7 +1,6 @@
 package app.vividfinance.vivid_finance_api.controller
 
 import app.vividfinance.vivid_finance_api.dto.UserRegistrationRequestDTO
-import app.vividfinance.vivid_finance_api.model.User
 import app.vividfinance.vivid_finance_api.service.UserService
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.PostMapping
