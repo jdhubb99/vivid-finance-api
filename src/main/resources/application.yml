@@ -17,5 +17,6 @@ spring:
     default-schema: vivid_data
 
 jwt:
-  secret: your-very-secure-secret-key
-  expiration-ms: 3600000 # 1 hour
+  secret:
+  accessTokenExpiration: 60000
+  refreshTokenExpiration: 360000
