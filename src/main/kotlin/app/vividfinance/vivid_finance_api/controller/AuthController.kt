@@ -1,8 +1,10 @@
 package app.vividfinance.vivid_finance_api.controller
 
 import app.vividfinance.vivid_finance_api.dto.AuthenticationRequestDTO
-import app.vividfinance.vivid_finance_api.service.UserService
-import org.springframework.http.ResponseEntity
+import app.vividfinance.vivid_finance_api.dto.AuthenticationResponseDTO
+import app.vividfinance.vivid_finance_api.dto.RefreshTokenRequestDTO
+import app.vividfinance.vivid_finance_api.dto.TokenResponseDTO
+import app.vividfinance.vivid_finance_api.service.AuthService
 import org.springframework.web.bind.annotation.PostMapping
 import org.springframework.web.bind.annotation.RequestBody
 import org.springframework.web.bind.annotation.RequestMapping
@@ -12,23 +14,16 @@ import org.springframework.web.bind.annotation.RestController
 @RestController
 @RequestMapping("/api/auth")
 class AuthController(
-    private val userService: UserService
+    private val authService: AuthService
 ) {
+    @PostMapping
+    fun authenticate(
+        @RequestBody request: AuthenticationRequestDTO
+    ): AuthenticationResponseDTO =
+        authService.authentication(request)
 
-    @PostMapping("/register")
-    fun register(@RequestBody request: AuthenticationRequestDTO): ResponseEntity<Any> {
-        return try {
-            userService.registerUser(
-                request.username,
-                request.password
-            )
-            ResponseEntity.ok(mapOf("message" to "User registered successfully"))
-        } catch (ex: IllegalArgumentException) {
-            ResponseEntity.badRequest().body(mapOf("error" to ex.message))
-        } catch (ex: Exception) {
-            ResponseEntity.badRequest().body(mapOf("error" to ex.message))
-        }
-    }
-
-    // TODO: Implement login endpoint with JWT token generation
+    @PostMapping("/refresh")
+    fun refreshAccessToken(
+        @RequestBody request: RefreshTokenRequestDTO
+    ): TokenResponseDTO = TokenResponseDTO(token = authService.refreshAccessToken(request.token))
 }
