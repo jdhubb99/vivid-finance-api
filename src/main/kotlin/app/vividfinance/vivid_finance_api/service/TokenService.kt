@@ -1,14 +1,14 @@
-package app.vividfinance.vivid_finance_api.security
+package app.vividfinance.vivid_finance_api.service
 
 import io.jsonwebtoken.Claims
 import io.jsonwebtoken.Jwts
 import io.jsonwebtoken.security.Keys
 import org.springframework.beans.factory.annotation.Value
-import org.springframework.stereotype.Component
-import java.util.Date
+import org.springframework.stereotype.Service
+import java.util.*
 import javax.crypto.SecretKey
 
-@Component
+@Service
 class TokenService(
     @Value("\${jwt.secret}") private val secret: String,
 ) {

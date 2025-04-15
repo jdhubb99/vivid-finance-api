@@ -2,7 +2,7 @@ package app.vividfinance.vivid_finance_api.repository
 
 import app.vividfinance.vivid_finance_api.model.User
 import org.springframework.data.jpa.repository.JpaRepository
-import java.util.UUID
+import java.util.*
 
 interface UserRepository : JpaRepository<User, UUID> {
     fun findByUsername(username: String): User?

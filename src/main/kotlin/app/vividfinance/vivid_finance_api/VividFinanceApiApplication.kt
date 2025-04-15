@@ -9,5 +9,5 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 class VividFinanceApiApplication
 
 fun main(args: Array<String>) {
-	runApplication<VividFinanceApiApplication>(*args)
+    runApplication<VividFinanceApiApplication>(*args)
 }
