@@ -1,6 +1,6 @@
 package app.vividfinance.vivid_finance_api.controller
 
-import app.vividfinance.vivid_finance_api.dto.UserRegistrationRequestDTO
+import app.vividfinance.vivid_finance_api.dto.AuthenticationRequestDTO
 import app.vividfinance.vivid_finance_api.service.UserService
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.PostMapping
@@ -16,11 +16,10 @@ class AuthController(
 ) {
 
     @PostMapping("/register")
-    fun register(@RequestBody request: UserRegistrationRequestDTO): ResponseEntity<Any> {
+    fun register(@RequestBody request: AuthenticationRequestDTO): ResponseEntity<Any> {
         return try {
             userService.registerUser(
                 request.username,
-                request.email,
                 request.password
             )
             ResponseEntity.ok(mapOf("message" to "User registered successfully"))

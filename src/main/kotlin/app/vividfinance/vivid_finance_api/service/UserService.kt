@@ -11,19 +11,14 @@ class UserService(
     private val userRepository: UserRepository,
     private val passwordEncoder: BCryptPasswordEncoder
 ) {
-    fun registerUser(username: String, email: String, rawPassword: String): User {
+    fun registerUser(username: String, rawPassword: String): User {
         // if the user already exists by username
         if (userRepository.findByUsername(username) != null) {
             throw IllegalArgumentException("Username already exists!")
         }
-        // if the user already exists by email
-        if (userRepository.findByEmail(email) != null) {
-            throw IllegalArgumentException("Email already exists!")
-        }
         val hashedPassword = passwordEncoder.encode(rawPassword)
         val user = User(
             username = username,
-            email = email,
             passwordHash = hashedPassword,
             registrationDate = OffsetDateTime.now()
         )
