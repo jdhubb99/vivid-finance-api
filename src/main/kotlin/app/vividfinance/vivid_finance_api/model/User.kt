@@ -1,6 +1,10 @@
 package app.vividfinance.vivid_finance_api.model
 
+import io.hypersistence.utils.hibernate.type.json.JsonBinaryType
 import jakarta.persistence.*
+import org.hibernate.annotations.JdbcTypeCode
+import org.hibernate.annotations.Type
+import org.hibernate.type.SqlTypes
 import java.time.OffsetDateTime
 import java.util.*
 
@@ -32,6 +36,8 @@ class User(
     @Column(name = "default_language", length = 10)
     val defaultLanguage: String = "en",
 
-    @Column(name = "notification_preferences")
+    @Type(JsonBinaryType::class)
+    @JdbcTypeCode(SqlTypes.JSON)
+    @Column(name = "notification_preferences", columnDefinition = "JSONB")
     val notificationPreferences: String? = null // JSON stored as String
 )
