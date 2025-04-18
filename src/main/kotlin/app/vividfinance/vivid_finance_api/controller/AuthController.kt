@@ -21,12 +21,6 @@ class AuthController(
     private val authService: AuthService,
     private val userService: UserService
 ) {
-    @PostMapping
-    fun authenticate(
-        @RequestBody request: AuthenticationRequestDTO
-    ): AuthenticationResponseDTO =
-        authService.authentication(request)
-
     @PostMapping("/refresh")
     fun refreshAccessToken(
         @RequestBody request: RefreshTokenRequestDTO
@@ -41,8 +35,14 @@ class AuthController(
     @PostMapping("/register")
     fun registerUser(
         @RequestBody request: AuthenticationRequestDTO
-    ): ResponseEntity<*> {
+    ): ResponseEntity<Any> {
         userService.registerUser(username = request.username, rawPassword = request.password)
         return ResponseEntity("Registration Successful", HttpStatus.CREATED)
     }
+
+    @PostMapping("/login")
+    fun authenticate(
+        @RequestBody request: AuthenticationRequestDTO
+    ): ResponseEntity<AuthenticationResponseDTO> =
+        ResponseEntity.ok(authService.authentication(request))
 }
