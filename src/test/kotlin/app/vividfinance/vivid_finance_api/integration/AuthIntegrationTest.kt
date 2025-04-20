@@ -26,9 +26,9 @@ import org.springframework.test.web.servlet.result.MockMvcResultMatchers.*
 import kotlin.test.Test
 
 
-@Import(PostgresTestcontainersConfig::class)
 @SpringBootTest
 @AutoConfigureMockMvc
+@Import(PostgresTestcontainersConfig::class)
 class AuthIntegrationTest {
 
     @Value("\${jwt.expiredToken}")
@@ -55,7 +55,7 @@ class AuthIntegrationTest {
         ).andExpect(status().isCreated)
 
         var response = mockMvc.perform(
-            post("/api/auth")
+            post("/api/auth/login")
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(jsonRequest)
         )
@@ -114,7 +114,7 @@ class AuthIntegrationTest {
         val jsonRequest = jacksonObjectMapper().writeValueAsString(authRequest)
 
         mockMvc.perform(
-            post("/api/auth")
+            post("/api/auth/login")
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(jsonRequest)
         )
@@ -149,7 +149,7 @@ class AuthIntegrationTest {
         ).andExpect(status().isCreated)
 
         val response = mockMvc.perform(
-            post("/api/auth")
+            post("/api/auth/login")
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(jsonRequest)
         )
@@ -185,7 +185,7 @@ class AuthIntegrationTest {
         ).andExpect(status().isCreated)
 
         val response = mockMvc.perform(
-            post("/api/auth")
+            post("/api/auth/login")
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(jsonRequest)
         )

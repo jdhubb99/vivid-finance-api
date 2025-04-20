@@ -3,7 +3,6 @@ package app.vividfinance.vivid_finance_api.controller
 import app.vividfinance.vivid_finance_api.dto.AuthenticationRequestDTO
 import app.vividfinance.vivid_finance_api.dto.AuthenticationResponseDTO
 import app.vividfinance.vivid_finance_api.dto.RefreshTokenRequestDTO
-import app.vividfinance.vivid_finance_api.dto.TokenResponseDTO
 import app.vividfinance.vivid_finance_api.service.AuthService
 import app.vividfinance.vivid_finance_api.service.UserService
 import io.jsonwebtoken.security.SignatureException
